@@ -69,7 +69,27 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
 
   try {
     await mcpServer.start();
+    // Log the bearer token so it can be pasted into TrueForge agent YAML
+    const token = mcpServer.getBearerToken();
+    console.log(`[ShadowForge] MCP server started on port ${mcpPort}`);
+    console.log(`[ShadowForge] MCP Bearer Token: ${token}`);
+    console.log(`[ShadowForge] Add this to your TrueForge agent YAML under auth.tokenRef or as SHADOWFORGE_MCP_TOKEN env var`);
     vscode.window.setStatusBarMessage(`$(check) ShadowForge MCP server running on port ${mcpPort}`, 5000);
+
+    // Show token notification once so user can configure TrueForge
+    const stored = context.globalState.get<string>('shadowforge.mcpToken');
+    if (stored !== token) {
+      await context.globalState.update('shadowforge.mcpToken', token);
+      const action = await vscode.window.showInformationMessage(
+        `ShadowForge MCP server started. Bearer token ready for TrueForge configuration.`,
+        'Copy Token',
+        'Dismiss'
+      );
+      if (action === 'Copy Token') {
+        await vscode.env.clipboard.writeText(token);
+        vscode.window.showInformationMessage('Token copied! Paste it into your TrueForge agent YAML as SHADOWFORGE_MCP_TOKEN.');
+      }
+    }
   } catch (err) {
     vscode.window.showErrorMessage(`ShadowForge: Failed to start MCP server: ${err}`);
   }
