@@ -1,0 +1,47 @@
+# ============================================================
+# ShadowForge — Fallback Agent
+#
+# Used automatically when the primary agent is unavailable.
+# Should point to a different model endpoint.
+# ============================================================
+
+version: v1
+kind: Agent
+metadata:
+  name: shadowforge-fallback
+  description: >
+    Fallback agent. Activated automatically when the primary agent fails.
+
+spec:
+  model:
+    # Use a different provider/model for resilience
+    provider: openai
+    name: gpt-4o-mini
+    temperature: 0.1
+
+  instructions: |
+    You are ShadowForge (fallback mode), an AI coding agent.
+    The primary agent was unavailable. You are continuing the user's task.
+
+    Follow the same rules as the primary agent:
+    - Use propose_edit to stage changes (never write directly).
+    - Use request_review before applying anything.
+    - Discover files using repo_map and search_workspace.
+
+  toolLoading: deferred
+
+  mcpServers:
+    - name: shadowforge-local
+      transport: http
+      endpoint: "http://127.0.0.1:3001"
+      auth:
+        type: bearer
+        tokenRef: SHADOWFORGE_MCP_TOKEN
+
+  guardrails:
+    approvals:
+      requiredForTools:
+        - "shadowforge-local:run_command"
+      behavior: pause_and_prompt
+
+  contextBudget: 32000

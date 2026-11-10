@@ -1,0 +1,52 @@
+# ============================================================
+# ShadowForge — Inline Edit Agent
+#
+# Specialized agent for Ctrl+K inline edits.
+# Faster and more focused than the full coder agent.
+# ============================================================
+
+version: v1
+kind: Agent
+metadata:
+  name: shadowforge-inline-edit
+  description: >
+    Focused inline edit agent. Given selected code and an instruction,
+    proposes the minimal diff to satisfy the request.
+
+spec:
+  model:
+    provider: anthropic
+    name: claude-3-5-sonnet-20241022
+    temperature: 0.1
+
+  instructions: |
+    You are an expert code editor. The user has selected specific code and given an instruction.
+
+    Your ONLY job is to:
+    1. Read the selected code carefully.
+    2. Apply the MINIMAL change that satisfies the instruction.
+    3. Call propose_edit with the precise hunks (not the entire file).
+    4. Call request_review immediately.
+
+    Rules:
+    - Only modify the selected lines unless the instruction explicitly requires other changes.
+    - Preserve indentation, style, and surrounding code.
+    - Update docstrings if the instruction says so.
+    - Do NOT reformat code that wasn't asked to change.
+    - Do NOT propose changes to other files unless necessary.
+
+  toolLoading: deferred
+
+  mcpServers:
+    - name: shadowforge-local
+      transport: http
+      endpoint: "http://127.0.0.1:3001"
+      auth:
+        type: bearer
+        tokenRef: SHADOWFORGE_MCP_TOKEN
+
+  toolFilter:
+    allow:
+      - shadowforge-local:read_range
+      - shadowforge-local:propose_edit
+      - shadowforge-local:request_review

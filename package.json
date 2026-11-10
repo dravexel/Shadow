@@ -1,0 +1,191 @@
+{
+  "name": "shadowforge",
+  "displayName": "ShadowForge — AI Coding Agent",
+  "description": "Antigravity-like AI coding agent powered by TrueForge. All changes reviewed before applying.",
+  "version": "0.1.0",
+  "publisher": "truefoundry-hackathon",
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": [
+    "AI",
+    "Other"
+  ],
+  "keywords": [
+    "ai",
+    "coding",
+    "agent",
+    "trueforge",
+    "truefoundry"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "shadowforge.openChat",
+        "title": "ShadowForge: Open Chat",
+        "icon": "$(comment-discussion)"
+      },
+      {
+        "command": "shadowforge.inlineEdit",
+        "title": "ShadowForge: Inline Edit (Ctrl+K)",
+        "icon": "$(edit)"
+      },
+      {
+        "command": "shadowforge.cancelTask",
+        "title": "ShadowForge: Cancel Current Task",
+        "icon": "$(stop-circle)"
+      },
+      {
+        "command": "shadowforge.openContextLedger",
+        "title": "ShadowForge: Open Context Ledger",
+        "icon": "$(list-tree)"
+      },
+      {
+        "command": "shadowforge.acceptAllHunks",
+        "title": "ShadowForge: Accept All Changes"
+      },
+      {
+        "command": "shadowforge.rejectAllHunks",
+        "title": "ShadowForge: Reject All Changes"
+      },
+      {
+        "command": "shadowforge.undoLastAccepted",
+        "title": "ShadowForge: Undo Last Accepted Changes"
+      },
+      {
+        "command": "shadowforge.configureModels",
+        "title": "ShadowForge: Configure Models"
+      },
+      {
+        "command": "shadowforge.startTrueForge",
+        "title": "ShadowForge: Start TrueForge Server"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "shadowforge.inlineEdit",
+        "key": "ctrl+k",
+        "when": "editorTextFocus && !editorReadonly"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "shadowforge",
+          "title": "ShadowForge",
+          "icon": "media/shadowforge.svg"
+        }
+      ]
+    },
+    "views": {
+      "shadowforge": [
+        {
+          "type": "webview",
+          "id": "shadowforge.chatPanel",
+          "name": "Chat"
+        },
+        {
+          "type": "webview",
+          "id": "shadowforge.contextLedger",
+          "name": "Context Ledger"
+        },
+        {
+          "id": "shadowforge.modelHealth",
+          "name": "Model Health"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "ShadowForge",
+      "properties": {
+        "shadowforge.trueforgeUrl": {
+          "type": "string",
+          "default": "http://localhost:8790",
+          "description": "TrueForge server URL"
+        },
+        "shadowforge.trueforgeApiKey": {
+          "type": "string",
+          "default": "",
+          "description": "TrueForge API key (leave empty for local mode)"
+        },
+        "shadowforge.primaryAgentId": {
+          "type": "string",
+          "default": "shadowforge-coder",
+          "description": "Primary TrueForge agent ID"
+        },
+        "shadowforge.fallbackAgentId": {
+          "type": "string",
+          "default": "shadowforge-fallback",
+          "description": "Fallback TrueForge agent ID (used on primary failure)"
+        },
+        "shadowforge.mcpPort": {
+          "type": "number",
+          "default": 3001,
+          "description": "Local MCP server port"
+        },
+        "shadowforge.contextBudgetTokens": {
+          "type": "number",
+          "default": 32000,
+          "description": "Maximum tokens for context assembly"
+        },
+        "shadowforge.allowedCommands": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [
+            "python",
+            "pytest",
+            "pip",
+            "git",
+            "npm",
+            "node"
+          ],
+          "description": "Allowlist of commands the agent may propose to run"
+        }
+      }
+    },
+    "menus": {
+      "editor/context": [
+        {
+          "command": "shadowforge.inlineEdit",
+          "when": "editorTextFocus",
+          "group": "shadowforge"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./tsconfig.json",
+    "watch": "tsc -watch -p ./tsconfig.json",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/tests/runTests.js",
+    "mcp:start": "node ./out/mcp/server.js",
+    "package": "vsce package"
+  },
+  "dependencies": {
+    "@truefoundry/trueforge-sdk": "^0.1.0",
+    "diff": "^5.1.0",
+    "express": "^4.18.2",
+    "ignore": "^5.3.0",
+    "micromatch": "^4.0.5",
+    "minimatch": "^9.0.3"
+  },
+  "devDependencies": {
+    "@types/diff": "^5.0.9",
+    "@types/express": "^4.17.21",
+    "@types/micromatch": "^4.0.10",
+    "@types/node": "^20.0.0",
+    "@types/vscode": "^1.90.0",
+    "@typescript-eslint/eslint-plugin": "^7.0.0",
+    "@typescript-eslint/parser": "^7.0.0",
+    "@vscode/vsce": "^2.24.0",
+    "eslint": "^8.57.0",
+    "typescript": "^5.4.5"
+  }
+}
