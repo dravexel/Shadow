@@ -295,3 +295,4 @@ export interface ProposeEditHunk {
   originalLines: string[];
   newLines: string[];
 }
+

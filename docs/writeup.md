@@ -189,3 +189,4 @@ Deferred tool loading is a TrueForge context-engineering feature. Instead of sen
 7. **Test runner integration**: After accepting changes, automatically run the relevant tests and show results in the chat panel.
 
 8. **Persistent session resume**: Currently a new session is created if TrueForge loses state. With full session persistence, the agent could resume interrupted tasks after a VS Code restart.
+

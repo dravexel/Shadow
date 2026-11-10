@@ -143,3 +143,4 @@ Make sure you imported the agent YAML in TrueForge and the name matches the VS C
 4. Press Enter
 5. Review the diff in the diff editor
 6. Click "Accept All" or "Reject All" in the chat panel
+

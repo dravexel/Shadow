@@ -104,3 +104,4 @@
 8. If fallback also fails → synthetic error shown in chat
 9. At no point was `ShadowWorkspace.applyAccepted()` called
 10. `git status` shows clean workspace
+

@@ -350,3 +350,4 @@ export class ShadowWorkspace {
     return result.join('\n');
   }
 }
+

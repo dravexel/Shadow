@@ -98,3 +98,4 @@ export const CONTEXT_LEDGER_PANEL_ID = 'shadowforge.contextLedger';
 // Storage keys
 export const STORAGE_KEY_UNDO_HISTORY = 'shadowforge.undoHistory';
 export const STORAGE_KEY_SESSION_ID = 'shadowforge.sessionId';
+

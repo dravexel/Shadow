@@ -321,3 +321,4 @@ export interface ExtensionState {
   pendingChangeSets: ChangeSet[];
   undoHistory: UndoSnapshot[];
 }
+

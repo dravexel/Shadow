@@ -68,3 +68,4 @@ export async function handleProposeEdit(args: ProposeEditArgs): Promise<{
     message: `${edit.hunks.length} hunk(s) staged for review in '${filePath}'. Call request_review to show the diff to the user.`,
   };
 }
+

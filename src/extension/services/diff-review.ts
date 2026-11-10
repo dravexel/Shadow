@@ -144,3 +144,4 @@ export class DiffReviewManager {
     this.reviewCallbacks.push(cb);
   }
 }
+

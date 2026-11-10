@@ -38,3 +38,4 @@ export async function handleReadRange(args: ReadRangeArgs): Promise<{ filePath: 
     isFromShadow,
   };
 }
+

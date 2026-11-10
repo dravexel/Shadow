@@ -68,3 +68,4 @@ class HealthItem extends vscode.TreeItem {
     this.iconPath = new vscode.ThemeIcon(icons[status] || 'question');
   }
 }
+

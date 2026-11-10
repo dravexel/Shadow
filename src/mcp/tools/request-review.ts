@@ -53,3 +53,4 @@ export async function handleRequestReview(args: RequestReviewArgs): Promise<{
     message: `Review requested for ${totalHunks} hunk(s). ${summary}. The user will accept or reject each hunk in the VS Code diff panel.`,
   };
 }
+

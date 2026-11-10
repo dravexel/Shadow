@@ -61,3 +61,4 @@ spec:
       - shadowforge-local:search_workspace
       - shadowforge-local:find_symbol
       - shadowforge-local:read_range
+

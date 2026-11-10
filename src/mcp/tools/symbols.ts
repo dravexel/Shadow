@@ -161,3 +161,4 @@ function extractTSSymbol(lines: string[], name: string): { source: string; start
 function escapeRegex(s: string): string {
   return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
+

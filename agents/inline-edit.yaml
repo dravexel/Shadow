@@ -50,3 +50,4 @@ spec:
       - shadowforge-local:read_range
       - shadowforge-local:propose_edit
       - shadowforge-local:request_review
+

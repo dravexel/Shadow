@@ -145,3 +145,4 @@ export class SessionManager {
     this.stateCallbacks.forEach(cb => cb(state));
   }
 }
+

@@ -80,3 +80,4 @@ function runProcess(command: string, args: string[], cwd: string): Promise<Comma
     });
   });
 }
+

@@ -217,3 +217,4 @@ The standard (eager) approach loads all tool schemas at the start of every turn.
 3. **TrueForge subagent in local mode**: The scout agent YAML is defined but requires verification that subagents work in SQLite local mode.
 
 4. **Turn ID**: TrueForge doesn't expose the turn ID in event payloads directly. We generate a local tracking ID for cancellation purposes.
+

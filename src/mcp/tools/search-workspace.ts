@@ -118,3 +118,4 @@ function collectFiles(workspaceRoot: string, filePattern?: string): string[] {
 function escapeRegex(s: string): string {
   return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
+

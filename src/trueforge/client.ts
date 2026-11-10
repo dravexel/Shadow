@@ -232,3 +232,4 @@ export class TrueForgeClient {
     return { ...this.health };
   }
 }
+
